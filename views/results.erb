@@ -1,0 +1,12 @@
+<h2>Search Results "<%= name %>"</h2>
+
+<% if @results.any? %>
+  <ul>
+    <% @results.each do |volunteer| %>
+      <li><a href="/volunteer/<%= volunteer.id %>"><%= volunteer.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no search results.</p>
+<% end %>
+<a href="/">Return home</a>

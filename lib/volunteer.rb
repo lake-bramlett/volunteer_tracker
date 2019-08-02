@@ -20,6 +20,18 @@ class Volunteer
     volunteers
   end
 
+  def self.search_by_name(name)
+    returned = DB.exec("SELECT * FROM volunteers WHERE lower(name) = '#{name.downcase}'")
+    volunteers = []
+    returned.each() do |volunteer|
+      name = volunteer.fetch("name")
+      project_id = volunteer.fetch("project_id").to_i
+      id = volunteer.fetch("id").to_i
+      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
+    end
+    volunteers
+  end
+
   def self.find(id)
     volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
     if volunteer

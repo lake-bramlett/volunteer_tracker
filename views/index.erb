@@ -12,6 +12,14 @@
 <% end %>
 <a href="/new_project">Add a New Project</a>
 
+<form action="/volunteers">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input id="search" name="search" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Search</button>
+</form>
+
 <h3>Volunteers</h3>
 <% if @volunteers.any? %>
   <ul>
