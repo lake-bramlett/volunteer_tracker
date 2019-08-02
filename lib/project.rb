@@ -12,8 +12,8 @@ class Project
     projects = []
     returned.each() do |project|
       title = project.fetch("title")
-      id = person.fetch("id").to_i
-      people.push(Person.new({:title => title, :id => id}))
+      id = project.fetch("id").to_i
+      projects.push(Project.new({:id => id, :title => title}))
     end
     projects
   end
