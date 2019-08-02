@@ -43,17 +43,23 @@ post ('/volunteer') do
 end
 
 patch ('/projects/:project_id/assign/:volunteer_id') do
-   project = params[:project_id].to_i()
-   @project = Project.find(project)
-   @project.assign(params[:volunteer_id].to_i)
-   @project.volunteers
-   redirect to("/projects/#{project}")
- end
+  project = params[:project_id].to_i()
+  @project = Project.find(project)
+  @project.assign(params[:volunteer_id].to_i)
+  @project.volunteers
+ redirect to("/projects/#{project}")
+end
 
- patch ('/projects/:project_id/unassign/:volunteer_id') do
-    project = params[:project_id].to_i()
-    @project = Project.find(project)
-    @project.unassign(params[:volunteer_id].to_i)
-    @project.volunteers
-    redirect to("/projects/#{project}")
-  end
+patch ('/projects/:project_id/unassign/:volunteer_id') do
+  project = params[:project_id].to_i()
+  @project = Project.find(project)
+  @project.unassign(params[:volunteer_id].to_i)
+  @project.volunteers
+  redirect to("/projects/#{project}")
+end
+
+delete ('/projects/:id/delete') do
+  @project = Project.find(:id)
+  @project.delete
+  redirect to('/')
+end

@@ -33,3 +33,7 @@
 <% end %>
 
 <a href="/">Return home</a>
+<form class="" action="/projects/<%= @project.id %>/delete" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit" name="button">Delete Project</button>
+</form>
