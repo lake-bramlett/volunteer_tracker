@@ -18,6 +18,17 @@ class Project
     projects
   end
 
+  def self.find(id)
+    project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
+    if project
+      title = project.fetch("title")
+      id = project.fetch("id").to_i
+      Project.new({:id => id, :title => title})
+    else
+      nil
+    end
+  end
+
   def save
     result = DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING id;")
     @id = result.first().fetch("id").to_i
