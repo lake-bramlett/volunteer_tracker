@@ -24,15 +24,15 @@ get ('/new_volunteer') do
 end
 
 get ('/projects/:id') do
-  @project = Project.find(:id)
+  @project = Project.find(params[:id])
   @volunteers = Volunteer.all
   @current_volunteers = @project.volunteers
   erb(:project)
 end
 
 
-get ('/volunteers/:id') do
-  @volunteer = Volunteer.find(:id)
+get ('/volunteer/:id') do
+  @volunteer = Volunteer.find(params[:id])
   erb(:volunteer)
 end
 
@@ -49,7 +49,7 @@ post ('/projects') do
 end
 
 post ('/volunteer') do
-  project = Volunteer.new(:name => params[:name], :project_id => 0, :id => nil)
+  project = Volunteer.new(:name => params[:name], :project_id => 0, :hours => 0, :id => nil)
   project.save
   redirect to('/')
 end
@@ -70,6 +70,12 @@ patch ('/projects/:project_id/unassign/:volunteer_id') do
   redirect to("/projects/#{project}")
 end
 
+patch ('/projects/:project_id/hours') do
+  @project = Project.find(params[:project_id])
+  @project.log_hours(params[:hours])
+  redirect to("/projects/#{params[:project_id]}")
+end
+
 delete ('/projects/:id/delete') do
   @project = Project.find(:id)
   @project.delete
@@ -77,7 +83,7 @@ delete ('/projects/:id/delete') do
 end
 
 delete ('/volunteers/:id/delete') do
-  @volunteer = Volunteer.find(:id)
+  @volunteer = Volunteer.find(params[:id])
   @volunteer.delete
   redirect to('/')
 end

@@ -1,10 +1,11 @@
 class Volunteer
-  attr_accessor :name, :project_id
+  attr_accessor :name, :project_id, :hours
   attr_reader :id
 
   def initialize(attributes)
     @name = attributes.fetch(:name)
     @project_id = attributes.fetch(:project_id).to_i
+    @hours = attributes.fetch(:hours).to_i
     @id = attributes.fetch(:id)
   end
 
@@ -14,8 +15,9 @@ class Volunteer
     returned.each() do |volunteer|
       name = volunteer.fetch("name")
       project_id = volunteer.fetch("project_id").to_i
+      hours = volunteer.fetch("hours").to_i
       id = volunteer.fetch("id").to_i
-      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
+      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id, :hours => hours}))
     end
     volunteers
   end
@@ -26,8 +28,9 @@ class Volunteer
     returned.each() do |volunteer|
       name = volunteer.fetch("name")
       project_id = volunteer.fetch("project_id").to_i
+      hours = volunteer.fetch("hours").to_i
       id = volunteer.fetch("id").to_i
-      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
+      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id, :hours => hours}))
     end
     volunteers
   end
@@ -37,15 +40,16 @@ class Volunteer
     if volunteer
       name = volunteer.fetch("name")
       project_id = volunteer.fetch("project_id").to_i
+      hours = volunteer.fetch("hours").to_i
       id = volunteer.fetch("id").to_i
-      Volunteer.new({:id => id, :name => name, :project_id => project_id})
+      Volunteer.new({:id => id, :name => name, :project_id => project_id, :hours => hours})
     else
       nil
     end
   end
 
   def save
-    result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
+    result = DB.exec("INSERT INTO volunteers (name, project_id, hours) VALUES ('#{@name}', #{@project_id}, #{@hours}) RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
 

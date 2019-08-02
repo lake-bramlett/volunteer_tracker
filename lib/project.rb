@@ -44,8 +44,9 @@ class Project
    returned.each() do |volunteer|
      name = volunteer.fetch("name")
      project_id = volunteer.fetch("project_id").to_i
+     hours = volunteer.fetch("hours").to_i
      id = volunteer.fetch("id").to_i
-     volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
+     volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id, :hours => hours}))
    end
    volunteers
   end
@@ -61,6 +62,10 @@ class Project
   def update(attributes)
     (attributes.key? :title) ? @title = attributes.fetch(:title) : @title = @title
     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+  end
+
+  def log_hours(hours)
+    DB.exec("UPDATE volunteers SET hours = hours + #{hours} WHERE project_id = #{@id}")
   end
 
   def delete

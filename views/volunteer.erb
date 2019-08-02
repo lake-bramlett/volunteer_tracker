@@ -1,6 +1,10 @@
 <h2>Volunteer: <%= @volunteer.name %></h2>
+<h3>Hours Volunteered: <%= @volunteer.hours %></h3>
 
 <form class="" action="/volunteers/<%= @volunteer.id %>/delete" method="post">
   <input name="_method" type="hidden" value="delete">
   <button type="submit" name="button">Remove Volunteer</button>
 </form>
+<a href="/projects/<%= @volunteer.project_id %>">View Current Project Assignment</a>
+<br>
+<a href="/">Return home</a>
