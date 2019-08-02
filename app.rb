@@ -19,13 +19,25 @@ get ('/new_project') do
   erb(:new_project)
 end
 
+get ('/new_volunteer') do
+  erb(:new_volunteer)
+end
+
 get ('/projects/:id') do
   @project = Project.find(:id)
+  @volunteers = Volunteer.all
+  @current_volunteers = @project.volunteers
   erb(:project)
 end
 
 post ('/projects') do
   project = Project.new(:title => params[:title], :id => nil)
+  project.save
+  redirect to('/')
+end
+
+post ('/volunteer') do
+  project = Volunteer.new(:name => params[:name], :project_id => 0, :id => nil)
   project.save
   redirect to('/')
 end
