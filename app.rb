@@ -41,3 +41,19 @@ post ('/volunteer') do
   project.save
   redirect to('/')
 end
+
+patch ('/projects/:project_id/assign/:volunteer_id') do
+   project = params[:project_id].to_i()
+   @project = Project.find(project)
+   @project.assign(params[:volunteer_id].to_i)
+   @project.volunteers
+   redirect to("/projects/#{project}")
+ end
+
+ patch ('/projects/:project_id/unassign/:volunteer_id') do
+    project = params[:project_id].to_i()
+    @project = Project.find(project)
+    @project.unassign(params[:volunteer_id].to_i)
+    @project.volunteers
+    redirect to("/projects/#{project}")
+  end

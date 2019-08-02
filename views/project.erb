@@ -5,6 +5,10 @@
   <ul>
     <% @current_volunteers.each do |volunteer| %>
       <li><a href="/volunteer/<%= volunteer.id %>"><%= volunteer.name %></a></li>
+      <form class="" action="/projects/<%= @project.id %>/unassign/<%= volunteer.id %>" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <button type="submit" name="button">Unassign</button>
+      </form>
     <% end %>
   </ul>
 <% else %>

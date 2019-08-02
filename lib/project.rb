@@ -50,6 +50,14 @@ class Project
    volunteers
   end
 
+  def assign(volunteer_id)
+    DB.exec("UPDATE volunteers SET project_id = (#{self.id}) WHERE id = (#{volunteer_id})")
+  end
+
+  def unassign(volunteer_id)
+    DB.exec("UPDATE volunteers SET project_id = (0) WHERE id = (#{volunteer_id})")
+  end
+
   def update(attributes)
     (attributes.key? :title) ? @title = attributes.fetch(:title) : @title = @title
     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
