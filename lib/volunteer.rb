@@ -41,4 +41,7 @@ class Volunteer
     self.name == thing_to_compare.name
   end
 
+  def delete
+    DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
+  end
 end

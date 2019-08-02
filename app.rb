@@ -30,6 +30,11 @@ get ('/projects/:id') do
   erb(:project)
 end
 
+get ('/volunteers/:id') do
+  @volunteer = Volunteer.find(:id)
+  erb(:volunteer)
+end
+
 post ('/projects') do
   project = Project.new(:title => params[:title], :id => nil)
   project.save
@@ -61,5 +66,11 @@ end
 delete ('/projects/:id/delete') do
   @project = Project.find(:id)
   @project.delete
+  redirect to('/')
+end
+
+delete ('/volunteers/:id/delete') do
+  @volunteer = Volunteer.find(:id)
+  @volunteer.delete
   redirect to('/')
 end
