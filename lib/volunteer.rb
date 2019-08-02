@@ -9,13 +9,13 @@ class Volunteer
   end
 
   def self.all
-    returned = DB.exec("SELECT * FROM projects ORDER BY title;")
+    returned = DB.exec("SELECT * FROM volunteers ORDER BY name;")
     volunteers = []
     returned.each() do |volunteer|
       name = volunteer.fetch("name")
       project_id = volunteer.fetch("project_id").to_i
       id = volunteer.fetch("id").to_i
-      projects.push(Project.new({:id => id, :name => name, :project_id => project_id}))
+      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
     end
     volunteers
   end
