@@ -60,4 +60,8 @@ class Volunteer
   def delete
     DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
   end
+  def log_hours(hours,project_id)
+    DB.exec("UPDATE volunteers SET hours = hours + #{hours} WHERE id = #{@id}")
+    DB.exec("UPDATE projects SET total_hours = total_hours + #{hours} WHERE id = #{project_id}")
+  end
 end

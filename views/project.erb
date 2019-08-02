@@ -1,14 +1,22 @@
 <h2><%= @project.title %></h2>
+<h3>Total hours worked: <%= @project.total_hours %></h3>
 
 <h3>Current Volunteers Assigned to "<%= @project.title %>"</h3>
 <% if @current_volunteers.any? %>
   <ul>
     <% @current_volunteers.each do |volunteer| %>
-      <li><a href="/volunteer/<%= volunteer.id %>"><%= volunteer.name %></a></li>
-      <form class="" action="/projects/<%= @project.id %>/unassign/<%= volunteer.id %>" method="post">
-        <input name="_method" type="hidden" value="patch">
-        <button type="submit" name="button">Unassign</button>
-      </form>
+      <li><a href="/volunteer/<%= volunteer.id %>"><%= volunteer.name %></a>
+        <form class="" action="/projects/<%= @project.id %>/unassign/<%= volunteer.id %>" method="post">
+          <input name="_method" type="hidden" value="patch">
+          <button type="submit" name="button">Unassign</button>
+        </form>
+        <form class="" action="/projects/<%= @project.id %>/<%= volunteer.id %>/hours" method="post">
+          <input name="_method" type="hidden" value="patch">
+          <label for="hours">Log Hours</label>
+          <input type="number" name="hours" class="form-control">
+          <button type="submit" name="button">Log Hours</button>
+        </form>
+      </li>
     <% end %>
   </ul>
 <% else %>
@@ -19,12 +27,13 @@
 <% if @volunteers.any? %>
   <ul>
     <% @volunteers.each do |volunteer| %>
-      <% if volunteer.project_id != @project.id %>
-      <li><a href="/voluntee/<%= volunteer.id %>"><%= volunteer.name %></a></li>
-      <form class="" action="/projects/<%= @project.id %>/assign/<%= volunteer.id %>" method="post">
-        <input name="_method" type="hidden" value="patch">
-        <button type="submit" name="button">Assign to Project</button>
-      </form>
+      <% if volunteer.project_id == 0 %>
+      <li><a href="/volunteer/<%= volunteer.id %>"><%= volunteer.name %></a>
+        <form class="" action="/projects/<%= @project.id %>/assign/<%= volunteer.id %>" method="post">
+          <input name="_method" type="hidden" value="patch">
+          <button type="submit" name="button">Assign to Project</button>
+        </form>
+      </li>
       <% end %>
     <% end %>
   </ul>
@@ -36,11 +45,4 @@
 <form class="" action="/projects/<%= @project.id %>/delete" method="post">
   <input name="_method" type="hidden" value="delete">
   <button type="submit" name="button">Delete Project</button>
-</form>
-
-<form class="" action="/projects/<%= @project.id %>/hours" method="post">
-  <input name="_method" type="hidden" value="patch">
-  <label for="hours">Log Hours</label>
-  <input type="number" name="hours" class="form-control">
-  <button type="submit" name="button">Log Hours</button>
 </form>

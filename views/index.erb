@@ -6,15 +6,16 @@
     <% @projects.each do |project| %>
       <li><a href="/projects/<%= project.id %>"><%= project.title %></a></li>
     <% end %>
+    <p>Sort projects by hours: <a href="#">Most to least</a> | <a href="#">Least to most</a>
   </ul>
 <% else %>
   <p>There are currently no projects active at this time.</p>
 <% end %>
 <a href="/new_project">Add a New Project</a>
-
+<hr>
 <form action="/volunteers">
   <div class="form-group">
-    <label for="search">Search</label>
+    <label for="search">Search Volunteers</label>
     <input id="search" name="search" class="form-control" type="text">
   </div>
   <button type="submit" class="btn">Search</button>

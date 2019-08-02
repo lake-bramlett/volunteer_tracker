@@ -43,7 +43,7 @@ get ('/volunteers') do
 end
 
 post ('/projects') do
-  project = Project.new(:title => params[:title], :id => nil)
+  project = Project.new(:title => params[:title], :total_hours => 0, :id => nil)
   project.save
   redirect to('/')
 end
@@ -70,9 +70,10 @@ patch ('/projects/:project_id/unassign/:volunteer_id') do
   redirect to("/projects/#{project}")
 end
 
-patch ('/projects/:project_id/hours') do
-  @project = Project.find(params[:project_id])
-  @project.log_hours(params[:hours])
+patch ('/projects/:project_id/:volunteer_id/hours') do
+  binding.pry
+  @volunteer = Volunteer.find(params[:volunteer_id])
+  @volunteer.log_hours(params[:hours], params[:project_id])
   redirect to("/projects/#{params[:project_id]}")
 end
 
