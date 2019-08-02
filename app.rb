@@ -30,9 +30,6 @@ get ('/projects/:id') do
   erb(:project)
 end
 
-get ('/volunteers') do
-  redirect to('/')
-end
 
 get ('/volunteers/:id') do
   @volunteer = Volunteer.find(:id)
@@ -40,9 +37,8 @@ get ('/volunteers/:id') do
 end
 
 get ('/volunteers') do
-  binding.pry
-  name = params[:search]
-  @results = Volunteer.search_by_name(name)
+  @name = params[:search]
+  @results = Volunteer.search_by_name(@name)
   erb(:results)
 end
 
