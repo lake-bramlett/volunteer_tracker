@@ -41,7 +41,7 @@ _'Volunteer Tracker' is an application designed to enter individual projects and
 
   ## Known Bugs
 
-  _Sorting projects by hours currently unavailable (2 August 2019)._
+  _No observed bugs currently at this time (2 August 2019)._
 
   ## Support and contact details
 

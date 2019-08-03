@@ -21,6 +21,18 @@ class Project
   end
 
   def self.most_to_least
+    returned = DB.exec("SELECT * FROM projects ORDER BY total_hours DESC;")
+    projects = []
+    returned.each() do |project|
+      title = project.fetch("title")
+      total_hours = project.fetch("total_hours").to_i
+      id = project.fetch("id").to_i
+      projects.push(Project.new({:id => id, :title => title, :total_hours => total_hours}))
+    end
+    projects
+  end
+
+  def self.least_to_most
     returned = DB.exec("SELECT * FROM projects ORDER BY total_hours ASC;")
     projects = []
     returned.each() do |project|

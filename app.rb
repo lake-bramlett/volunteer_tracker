@@ -35,8 +35,14 @@ get ('/projects/:id/edit_project') do
   erb(:edit_project)
 end
 
-get ('/projects/most_to_least') do
+get ('/projects/sort/most_to_least') do
   @projects = Project.most_to_least
+  @volunteers = Volunteer.all
+  erb(:index)
+end
+
+get ('/projects/sort/least_to_most') do
+  @projects = Project.least_to_most
   @volunteers = Volunteer.all
   erb(:index)
 end
@@ -51,6 +57,10 @@ get ('/volunteers') do
   @name = params[:search]
   @results = Volunteer.search_by_name(@name)
   erb(:results)
+end
+
+get ('/projects') do
+  redirect to('/')
 end
 
 post ('/projects') do
