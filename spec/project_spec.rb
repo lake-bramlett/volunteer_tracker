@@ -51,6 +51,16 @@ describe Project do
     end
   end
 
+  describe '.most_to_least' do
+    it 'sorts projects by most to least hours in descending order' do
+      project1 = Project.new({:title => 'Teaching Kids to Code', :total_hours => 2, :id => nil})
+      project1.save
+      project2 = Project.new({:title => 'Teaching Ruby to Kids', :total_hours => 3, :id => nil})
+      project2.save
+      expect(Project.most_to_least).to eq [project2, project1]
+    end
+  end
+
   describe '.find' do
     it 'returns a project by id' do
       project1 = Project.new({:title => 'Teaching Kids to Code', :total_hours => 0, :id => nil})
