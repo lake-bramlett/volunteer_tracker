@@ -82,10 +82,21 @@ patch ('/projects/:project_id/unassign/:volunteer_id') do
 end
 
 patch ('/projects/:project_id/:volunteer_id/hours') do
-  binding.pry
   @volunteer = Volunteer.find(params[:volunteer_id])
   @volunteer.log_hours(params[:hours], params[:project_id])
   redirect to("/projects/#{params[:project_id]}")
+end
+
+patch ('/projects/:project_id/edit') do
+  @project = Project.find(params[:project_id])
+  @project.update(:title => params[:title], :total_hours => params[:total_hours])
+  redirect to("/projects/#{params[:project_id]}")
+end
+
+patch ('/volunteers/:volunteer_id/edit') do
+  @volunteer = Volunteer.find(params[:volunteer_id])
+  @volunteer.update(:name => params[:name], :hours => params[:hours])
+  redirect to("/")
 end
 
 delete ('/projects/:id/delete') do

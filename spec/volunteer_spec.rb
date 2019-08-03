@@ -31,7 +31,7 @@ describe Volunteer do
     it 'returns all volunteers' do
       volunteer1 = Volunteer.new({:name => 'Jane', :project_id => 1, :hours => 0, :id => nil})
       volunteer1.save
-      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => 1, :id => nil})
+      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => 1, :hours => 0, :id => nil})
       volunteer2.save
       expect(Volunteer.all).to eq [volunteer1, volunteer2]
     end
@@ -49,7 +49,7 @@ describe Volunteer do
     it 'returns a volunteer by id' do
       volunteer1 = Volunteer.new({:name => 'Jane', :project_id => 1, :hours => 0, :id => nil})
       volunteer1.save
-      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => 1, :id => nil})
+      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => 1, :hours => 0, :id => nil})
       volunteer2.save
       expect(Volunteer.find(volunteer1.id)).to eq volunteer1
     end

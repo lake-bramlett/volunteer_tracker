@@ -64,4 +64,9 @@ class Volunteer
     DB.exec("UPDATE volunteers SET hours = hours + #{hours} WHERE id = #{@id}")
     DB.exec("UPDATE projects SET total_hours = total_hours + #{hours} WHERE id = #{project_id}")
   end
+
+  def update(attributes)
+    (attributes.key? :name) ? @name = attributes.fetch(:name) : @name = @name
+    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
+  end
 end
