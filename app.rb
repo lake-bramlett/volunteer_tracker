@@ -30,6 +30,17 @@ get ('/projects/:id') do
   erb(:project)
 end
 
+get ('/projects/:id/edit_project') do
+  @project = Project.find(params[:id])
+  erb(:edit_project)
+end
+
+get ('/projects/most_to_least') do
+  @projects = Project.most_to_least
+  @volunteers = Volunteer.all
+  erb(:index)
+end
+
 
 get ('/volunteer/:id') do
   @volunteer = Volunteer.find(params[:id])

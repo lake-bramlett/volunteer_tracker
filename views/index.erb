@@ -6,7 +6,7 @@
     <% @projects.each do |project| %>
       <li><a href="/projects/<%= project.id %>"><%= project.title %></a></li>
     <% end %>
-    <p>Sort projects by hours: <a href="#">Most to least</a> | <a href="#">Least to most</a>
+    <p>Sort projects by hours: <a href="/projects/most_to_least">Most to least</a> | <a href="/projects/least_to_most">Least to most</a>
   </ul>
 <% else %>
   <p>There are currently no projects active at this time.</p>

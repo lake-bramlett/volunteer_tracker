@@ -1,5 +1,6 @@
 <h2><%= @project.title %></h2>
 <h3>Total hours worked: <%= @project.total_hours %></h3>
+<a href="/projects/<%= @project.id %>/edit_project">Edit Project Info</a>
 
 <h3>Current Volunteers Assigned to "<%= @project.title %>"</h3>
 <% if @current_volunteers.any? %>
